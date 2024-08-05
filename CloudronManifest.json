@@ -1,0 +1,14 @@
+{
+  "title": " Block Backend Nest ",
+  "version": "0.1.0",
+  "healthCheckPath": "/health",
+  "httpPort": 8000,
+  "addons": {
+    "localstorage": {},
+    "redis": {},
+    "sendmail": {},
+    "postgresql": {}
+  },
+  "manifestVersion": 2,
+  "icon": ""
+}

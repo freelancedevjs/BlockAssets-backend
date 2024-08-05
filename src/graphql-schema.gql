@@ -1,0 +1,797 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateDisclosureInput {
+  content: String!
+  name: String!
+  property: PropertyIdInput!
+  status: DisclosureStatus!
+}
+
+input CreateFaqInput {
+  content: String!
+  status: FaqStatus
+  title: String!
+}
+
+input CreateNewsInput {
+  content: String!
+  image: Upload!
+  status: NewsStatus!
+  title: String!
+}
+
+input CreateNoticeInput {
+  category: NoticeCategory
+  content: String!
+  image: Upload
+  property: PropertyIdInput
+  status: NoticeStatus
+  title: String!
+}
+
+input CreateNotificationInput {
+  category: NotificationCategory!
+  content: String!
+  mode: NotificationMode!
+  properties: [PropertyIdInput!]
+  title: String!
+  users: [UserIdInput!]
+}
+
+input CreatePageInput {
+  content: String!
+  name: String!
+  status: PageStatus
+}
+
+input CreatePropertyAttachmentInput {
+  image: Upload!
+  name: String!
+  property: PropertyIdInput!
+  status: PropertyAttachmentStatus!
+}
+
+input CreatePropertyImageInput {
+  image: Upload!
+  property: PropertyIdInput!
+}
+
+input CreatePropertyInput {
+  basic_info: PropertyBasicInformationInput!
+  content: String!
+  endsAt: DateTime!
+  name: String!
+  startsAt: DateTime!
+  status: PropertyStatus!
+  subscription_info: PropertySubscriptionInformationInput!
+}
+
+input CreatePropertyNotificationInput {
+  property: PropertyIdInput!
+}
+
+input CreateSubscriptionInput {
+  amount: Float!
+  property: PropertyIdInput!
+  warranty: Float!
+}
+
+input CreateUserInput {
+  address: String!
+  city: String!
+  companyName: String
+  country: String!
+  dob: DateTime
+  email: String!
+  firstName: String
+  lastName: String
+  password: String!
+  phone: String!
+  postalCode: String!
+  role: String!
+  state: String!
+  tnc_status: Boolean!
+  userType: UserType!
+}
+
+input CreateVoteEntryInput {
+  action: VoteAction!
+  vote: VoteIdInput!
+}
+
+input CreateVoteInput {
+  content: String!
+  endsAt: DateTime!
+  name: String!
+  property: PropertyIdInput!
+  startsAt: DateTime!
+}
+
+input CreateWalletInput {
+  private_key: String!
+}
+
+input CursorInput {
+  contract_addresses: [String!]
+  cursor: String
+  limit: Float
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Disclosure {
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  property: Property!
+  slug: String!
+  status: DisclosureStatus!
+  updatedAt: DateTime!
+}
+
+enum DisclosureStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type Faq {
+  content: String!
+  id: ID!
+  status: FaqStatus!
+  title: String!
+}
+
+enum FaqStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type GetDisclosureType {
+  count: Float
+  data: [Disclosure!]
+}
+
+type GetFaqType {
+  count: Float
+  data: [Faq!]
+}
+
+input GetManyInput {
+  """count or data or all, default = data"""
+  dataType: String
+
+  """
+  {key: "ASC" or "DESC" or "asc" or "desc" or 1 or -1} or {key: {direction: "ASC" or "DESC" or "asc" or "desc", nulls: "first" or "last" or "FIRST" or "LAST"}}}
+  """
+  order: JSON
+  pagination: IPagination
+  where: JSON
+}
+
+type GetNewsType {
+  count: Float
+  data: [News!]
+}
+
+type GetNoticeType {
+  count: Float
+  data: [Notice!]
+}
+
+type GetNotificationType {
+  count: Float
+  data: [Notification!]
+}
+
+input GetOneInput {
+  where: JSON!
+}
+
+type GetPageType {
+  count: Float
+  data: [Page!]
+}
+
+type GetPropertyImageType {
+  count: Float
+  data: [PropertyImage!]
+}
+
+type GetPropertyType {
+  count: Float
+  data: [Property!]
+}
+
+type GetSubscriptionType {
+  count: Float
+  data: [Subscription!]
+}
+
+type GetUserType {
+  count: Float
+  data: [User!]
+}
+
+type GetVoteType {
+  count: Float
+  data: [Vote!]
+}
+
+type GrossFloorArea {
+  case: String!
+  total: String!
+}
+
+input GrossFloorAreaInput {
+  case: String!
+  total: String!
+}
+
+type GrossLandArea {
+  case: String!
+  total: String!
+}
+
+input GrossLandAreaInput {
+  case: String!
+  total: String!
+}
+
+input IPagination {
+  """Started from 0"""
+  page: Int!
+
+  """Size of page"""
+  size: Int!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type JwtWithUser {
+  jwt: String!
+  user: User!
+}
+
+type LogoutOutput {
+  success: Boolean!
+}
+
+type Mutation {
+  createDisclosure(input: CreateDisclosureInput!): Disclosure!
+  createFaq(input: CreateFaqInput!): Faq!
+  createNews(input: CreateNewsInput!): News!
+  createNotice(input: CreateNoticeInput!): Notice!
+  createNotification(input: CreateNotificationInput!): Notification!
+  createPage(input: CreatePageInput!): Page!
+  createProperty(input: CreatePropertyInput!): Property!
+  createPropertyAttachment(input: CreatePropertyAttachmentInput!): PropertyAttachment!
+  createPropertyImage(input: CreatePropertyImageInput!): PropertyImage!
+  createPropertyNotification(input: CreatePropertyNotificationInput!): PropertyNotification!
+  createSubscription(input: CreateSubscriptionInput!): Subscription!
+  createUser(input: CreateUserInput!): User!
+  createVote(input: CreateVoteInput!): Vote!
+  createVoteEntry(input: CreateVoteEntryInput!): Vote!
+  deleteAccount: LogoutOutput!
+  deleteDisclosure(id: String!): JSON!
+  deleteFaq(id: Float!): JSON!
+  deleteNews(id: String!): JSON!
+  deleteNotice(id: Float!): JSON!
+  deleteNotification(id: String!): JSON!
+  deletePage(id: Float!): JSON!
+  deleteProperty(id: String!): JSON!
+  deletePropertyAttachment(id: String!): JSON!
+  deletePropertyImage(id: String!): JSON!
+  deletePropertyNotification(input: String!): JSON!
+  deleteUser(id: String!): JSON!
+  deleteVote(id: String!): JSON!
+
+  """"""
+  resendEmailOtp(input: OtpReSendInput!): OtpOutput!
+
+  """"""
+  resendPhoneOtp(input: OtpReSendInput!): OtpOutput!
+  sendFunds(input: SendFundsInput!): String!
+
+  """"""
+  sendMyOtp(input: MyOtpSendInput!): OtpOutput!
+
+  """"""
+  sendOtp(input: OtpSendInput!): OtpOutput!
+  signIn(input: SignInInput!): JwtWithUser!
+  signOut: LogoutOutput!
+
+  """"""
+  signUp(input: SignUpInput!): JwtWithUser!
+  updateDisclosure(id: String!, input: UpdateDisclosureInput!): JSON!
+  updateFaq(id: Float!, input: UpdateFaqInput!): JSON!
+  updateMe(input: UpdateUserInput!): JSON!
+  updateNews(id: String!, input: UpdateNewsInput!): JSON!
+  updateNotice(id: Float!, input: UpdateNoticeInput!): JSON!
+  updateNotification(id: String!, input: UpdateNotificationInput!): JSON!
+  updatePage(id: Float!, input: UpdatePageInput!): JSON!
+  updateProperty(id: String!, input: UpdatePropertyInput!): JSON!
+  updatePropertyAttachment(id: String!, input: UpdatePropertyAttachmentInput!): JSON!
+  updatePropertyImage(id: String!, input: UpdatePropertyImageInput!): JSON!
+  updateSubscription(id: Float!, input: UpdateSubscriptionInput!): JSON!
+  updateUser(id: String!, input: UpdateUserAdminInput!): JSON!
+  updateVote(id: String!, input: UpdateVoteInput!): JSON!
+  updateVoteEntry(input: CreateVoteEntryInput!): JSON!
+  updateWallet(privateKey: CreateWalletInput!): Wallet!
+}
+
+input MyOtpSendInput {
+  email: Boolean
+  phone: Boolean
+}
+
+type News {
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  image: String!
+  slug: String!
+  status: NewsStatus!
+  title: String!
+  updatedAt: DateTime!
+}
+
+enum NewsStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type Notice {
+  category: NoticeCategory!
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  image: String
+  property: Property
+  slug: String!
+  status: NoticeStatus!
+  title: String!
+  updatedAt: DateTime!
+}
+
+enum NoticeCategory {
+  DIVIDEND
+  OTHER
+  PROPERTY
+  SUBSCRIPTION
+}
+
+enum NoticeStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type Notification {
+  category: NotificationCategory!
+  content: String!
+  createdAt: DateTime!
+  id: ID!
+  mode: NotificationMode!
+  property: Property
+  readAt: DateTime!
+  title: String!
+  updatedAt: DateTime!
+  user: User
+}
+
+enum NotificationCategory {
+  DIVIDEND
+  OTHER
+  PROPERTY
+  SUBSCRIPTION
+}
+
+enum NotificationMode {
+  ALL
+  EMAIL
+  SMS
+}
+
+type OtpOutput {
+  data: OtpOutputData!
+  token: String!
+}
+
+type OtpOutputData {
+  account: String!
+  attemptsRemaining: Float!
+  expiresAt: Float!
+  id: String!
+  resendAt: Float!
+}
+
+input OtpReSendInput {
+  token: String!
+}
+
+input OtpSendInput {
+  email: String
+  phone: String
+}
+
+input OtpVerifyInput {
+  otp: String!
+  token: String!
+}
+
+type Page {
+  content: String!
+  id: ID!
+  name: String!
+  slug: String!
+  status: PageStatus!
+  user: User!
+}
+
+enum PageStatus {
+  DRAFT
+  PUBLISHED
+}
+
+type Property {
+  attachments: [PropertyAttachment!]
+  basic_info: JSON!
+  content: String!
+  createdAt: DateTime!
+  disclosures: [Disclosure!]
+  dividend_address: String
+  endsAt: DateTime!
+  firstDepositDate: DateTime!
+  id: ID!
+  images: [PropertyImage!]
+  name: String!
+  notices: [Notice!]
+  notifications: [PropertyNotification!]
+  secondDepositDate: DateTime!
+  slug: String!
+  somi_cold_wallet_address: String
+  startsAt: DateTime!
+  status: PropertyStatus!
+  subscription_info: JSON!
+  subscriptions: [Subscription!]
+  updatedAt: DateTime!
+  usdt_cold_wallet_address: String
+  user_notifications: [Notification!]
+  votes: [Vote!]
+}
+
+type PropertyAttachment {
+  createdAt: DateTime!
+  id: ID!
+  name: String
+  property: Property!
+  status: PropertyAttachmentStatus!
+  updatedAt: DateTime!
+  url: String!
+}
+
+enum PropertyAttachmentStatus {
+  DRAFT
+  PUBLISHED
+}
+
+input PropertyBasicInformationInput {
+  address: String!
+  completion_date: String!
+  floor: String!
+  government_land_value: String!
+  gross_floor_area: GrossFloorAreaInput!
+  land_area: GrossLandAreaInput!
+  zoning: String!
+}
+
+input PropertyIdInput {
+  id: String!
+}
+
+type PropertyImage {
+  createdAt: DateTime!
+  id: ID!
+  property: Property!
+  updatedAt: DateTime!
+  url: String!
+}
+
+type PropertyNotification {
+  createdAt: DateTime!
+  id: ID!
+  property: Property!
+  updatedAt: DateTime!
+}
+
+enum PropertyStatus {
+  CLOSED
+  DRAFT
+  PUBLISHED
+}
+
+input PropertySubscriptionInformationInput {
+  allocation_date: String!
+  apr: Float!
+  frequency: String!
+  listing_date: String!
+  total_cap: Float!
+}
+
+type Query {
+  getDepositStatus(input: PropertyIdInput!): Boolean!
+  getDisclosure(input: GetOneInput!): Disclosure!
+  getDisclosures(input: GetManyInput): GetDisclosureType!
+  getFaqs(input: GetManyInput): GetFaqType!
+  getManyDisclosureList(input: GetManyInput): GetDisclosureType!
+  getManyFaqList(input: GetManyInput): GetFaqType!
+  getManyNews(input: GetManyInput): GetNewsType!
+  getManyNewsList(input: GetManyInput): GetNewsType!
+  getManyNoticeList(input: GetManyInput): GetNoticeType!
+  getManyNotices(input: GetManyInput): GetNoticeType!
+  getManyNotificationList(input: GetManyInput): GetNotificationType!
+  getManyPageList(input: GetManyInput): GetPageType!
+  getManyPropertyImageList(input: GetManyInput): GetPropertyImageType!
+  getManyPropertyList(input: GetManyInput): GetPropertyType!
+  getManySubscriptionList(input: GetManyInput): GetSubscriptionType!
+  getManyUserList(input: GetManyInput): GetUserType!
+  getManyVoteList(input: GetManyInput): GetVoteType!
+  getMe: User!
+  getMyNotifications(input: GetManyInput): GetNotificationType!
+  getMyOneSubscription(input: GetOneInput!): Subscription!
+  getMyRank(input: PropertyIdInput!): Float!
+  getMySubscriptionList(input: GetManyInput): GetSubscriptionType!
+  getMyVote(input: GetOneInput): Vote!
+  getMyVotes(input: GetManyInput): GetVoteType!
+  getNews(input: GetOneInput!): News!
+  getNotice(input: GetOneInput!): Notice!
+  getOneDisclosure(input: GetOneInput!): Disclosure!
+  getOneFaq(input: GetOneInput!): Faq!
+  getOneImage(input: GetOneInput!): PropertyImage!
+  getOneNews(input: GetOneInput!): News!
+  getOneNotice(input: GetOneInput!): Notice!
+  getOneNotification(input: GetOneInput!): Notification!
+  getOnePage(input: GetOneInput!): Page!
+  getOneProperty(input: GetOneInput!): Property!
+  getOneSubscription(input: GetOneInput!): Subscription!
+  getOneUser(input: GetOneInput!): User!
+  getOneVote(input: GetOneInput!): Vote!
+  getPage(input: String!): Page!
+  getPages(input: GetManyInput): GetPageType!
+  getProperties(input: GetManyInput): GetPropertyType!
+  getProperty(input: String!): Property!
+  getPropertyImage(input: GetOneInput!): PropertyImage!
+  getPropertyImages(input: GetManyInput): GetPropertyType!
+  getRankedSubscriptionList(input: GetManyInput!): GetSubscriptionType!
+  getVoteProgress(input: VoteIdInput): Vote!
+  getWalletBalances(input: CursorInput): WalletAssets!
+  getWalletTransactions(input: CursorInput): [TransactionPage!]!
+}
+
+input SendFundsInput {
+  amount: String!
+  emailOtp: OtpVerifyInput!
+  toAddress: String!
+  tokenAddress: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
+
+input SignUpInput {
+  address: String!
+  city: String!
+  companyName: String
+  country: String!
+  dob: DateTime
+  email: String!
+  emailOtp: OtpVerifyInput!
+  firstName: String
+  lastName: String
+  password: String!
+  phone: String!
+  postalCode: String!
+  smsOtp: OtpVerifyInput!
+  state: String!
+  tnc_status: Boolean!
+  userType: UserType!
+}
+
+type Subscription {
+  amount: Float!
+  createdAt: DateTime!
+  deposit_amount: Float!
+  id: ID!
+  property: Property!
+  updatedAt: DateTime!
+  user: User!
+  warranty: Float!
+}
+
+type TransactionPage {
+  nextCursor: String
+  transactions: JSON!
+}
+
+input UpdateDisclosureInput {
+  content: String!
+  name: String!
+  property: PropertyIdInput!
+  status: DisclosureStatus!
+}
+
+input UpdateFaqInput {
+  content: String
+  status: FaqStatus
+  title: String
+}
+
+input UpdateNewsInput {
+  content: String
+  image: Upload
+  status: NewsStatus
+  title: String
+}
+
+input UpdateNoticeInput {
+  category: NoticeCategory
+  content: String
+  image: Upload
+  property: PropertyIdInput
+  status: NoticeStatus
+  title: String
+}
+
+input UpdateNotificationInput {
+  title: String!
+}
+
+input UpdatePageInput {
+  content: String
+  name: String
+  status: PageStatus
+}
+
+input UpdatePropertyAttachmentInput {
+  image: Upload!
+  name: String!
+  property: PropertyIdInput!
+  status: PropertyAttachmentStatus!
+}
+
+input UpdatePropertyImageInput {
+  image: Upload!
+  property: PropertyIdInput!
+}
+
+input UpdatePropertyInput {
+  basic_info: PropertyBasicInformationInput!
+  content: String!
+  endsAt: DateTime!
+  name: String!
+  startsAt: DateTime!
+  status: PropertyStatus!
+  subscription_info: PropertySubscriptionInformationInput!
+}
+
+input UpdateSubscriptionInput {
+  amount: Float!
+  warranty: Float!
+}
+
+input UpdateUserAdminInput {
+  email: String
+  password: String
+  phone: String
+  role: String
+}
+
+input UpdateUserInput {
+  confirm_new_password: String
+  email: String
+  emailOtp: OtpVerifyInput
+  marketing: Boolean
+  new_password: String
+  password: String
+  phone: String
+  phoneOtp: OtpVerifyInput
+}
+
+input UpdateVoteInput {
+  content: String
+  endsAt: DateTime
+  name: String
+  startsAt: DateTime
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type User {
+  address: String!
+  city: String!
+  companyName: String
+  country: String!
+  createdAt: DateTime!
+  dob: DateTime!
+  email: String!
+  firstName: String
+  id: ID!
+  lastName: String
+  marketing: Boolean!
+  new_email: String!
+  notifications: [Notification!]
+  pages: [Page!]
+  phone: String!
+  postalCode: String!
+  property_notifications: [PropertyNotification!]
+  role: String!
+  state: String!
+  subscriptions: [Subscription!]
+  tnc_status: Boolean!
+  updatedAt: DateTime!
+  userType: UserType!
+  vote_entries: [VoteEntry!]
+  wallet: Wallet
+}
+
+input UserIdInput {
+  id: String!
+}
+
+enum UserType {
+  CORPORATE
+  INDIVIDUAL
+}
+
+type Vote {
+  content: String!
+  createdAt: DateTime!
+  endsAt: DateTime!
+  id: ID!
+  name: String!
+  property: Property!
+  slug: String!
+  startsAt: DateTime!
+  updatedAt: DateTime!
+  vote_entries: [VoteEntry!]
+}
+
+enum VoteAction {
+  APPROVE
+  REJECT
+}
+
+type VoteEntry {
+  action: VoteAction!
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+  user: User!
+  vote: Vote!
+}
+
+input VoteIdInput {
+  id: String!
+}
+
+type Wallet {
+  address: String!
+  createdAt: DateTime!
+  id: ID!
+  updatedAt: DateTime!
+}
+
+type WalletAssets {
+  tokens: JSON!
+}
